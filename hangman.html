@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <div align="center">
+    <h1>Hangman</h1>
+    <h2>Theme: Lord of the Rings Character Name</h2>
+    <h3>Renubic</h3>
+    <p ID="word"></p>
+    <p>Total number of letters you need to guess:
+      <SPAN ID="wordCount"></SPAN>
+    </p>
+    <p ID="letter"></p>
+    <p>Lives:
+      <SPAN ID="heart"></SPAN>
+    </p>
+    <p ID="answer"></p>
+    <button ID="A" onclick="pickLetter('A')">A</button>
+    <button ID="B" onclick="pickLetter('B')">B</button>
+    <button ID="C" onclick="pickLetter('C')">C</button>
+    <button ID="D" onclick="pickLetter('D')">D</button>
+    <button ID="E" onclick="pickLetter('E')">E</button>
+    <button ID="F" onclick="pickLetter('F')">F</button>
+    <br/>
+    <br/>
+    <button ID="G" onclick="pickLetter('G')">G</button>
+    <button ID="H" onclick="pickLetter('H')">H</button>
+    <button ID="I" onclick="pickLetter('I')">I</button>
+    <button ID="J" onclick="pickLetter('J')">J</button>
+    <button ID="K" onclick="pickLetter('K')">K</button>
+    <button ID="L" onclick="pickLetter('L')">L</button>
+    <button ID="M" onclick="pickLetter('M')">M</button>
+    <br/>
+    <br/>
+    <button ID="N" onclick="pickLetter('N')">N</button>
+    <button ID="O" onclick="pickLetter('O')">O</button>
+    <button ID="P" onclick="pickLetter('P')">P</button>
+    <button ID="Q" onclick="pickLetter('Q')">Q</button>
+    <button ID="R" onclick="pickLetter('R')">R</button>
+    <button ID="S" onclick="pickLetter('S')">S</button>
+    <br/>
+    <br/>
+    <button ID="T" onclick="pickLetter('T')">T</button>
+    <button ID="U" onclick="pickLetter('U')">U</button>
+    <button ID="V" onclick="pickLetter('V')">V</button>
+    <button ID="W" onclick="pickLetter('W')">W</button>
+    <button ID="X" onclick="pickLetter('X')">X</button>
+    <button ID="Y" onclick="pickLetter('Y')">Y</button>
+    <button ID="Z" onclick="pickLetter('Z')">Z</button>
+
+
+<script>
+  var words = ["FRODO", "GIMLI", "LEGOLAS", "BOROMIR", "GANDALF", "SAMWISE", "ARAGORN", "MERIADOC"]
+  var num = ["_____", "_____", "_______", "_______", "_______", "_______", "_______", "________"]
+  var rand = Math.floor((Math.random() * 8) + 0)
+  document.getElementById("word").innerHTML = num[rand]
+  var randword = words[rand]
+  // document.getElementById("answer").innerHTML = randword
+  var randnum = num[rand]
+  var lives = 6
+  document.getElementById("heart").innerHTML = lives
+  var wordCount = randword.length
+  document.getElementById("wordCount").innerHTML = wordCount
+
+  function pickLetter(letter) {
+    for (i = 0; i < words[rand].length; i++) {
+      if (randword.charAt(i) == letter) {
+        var res = randnum.substr(0, i) + letter + randnum.substr(i + 1, randword.length - 1 - i)
+        randnum = res
+        document.getElementById("word").innerHTML = randnum
+      }
+    }
+    if (randword.indexOf(letter) < 0) {
+      lives = lives - 1
+      document.getElementById("heart").innerHTML = lives
+      document.getElementById(letter).style.background = '#ff0000'
+      document.getElementById(letter).disabled = true
+    }
+    if (randword == randnum) {
+      if (alert("Victory!! You guessed the word correctly! The game will restart.")) {} else {
+        window.location.reload()
+      }
+    }
+    if (lives == 0) {
+      if (alert("Game Over! The word was " + randword + "." + " The game will restart.")) {} else {
+        window.location.reload()
+      }
+    }
+  }
+</script>
+
+</body>
+</html>
